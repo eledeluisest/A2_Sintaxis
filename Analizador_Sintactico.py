@@ -14,6 +14,6 @@ for i, line in enumerate(infile):
     for tree in trees:
         print(tree)
         print("="*10+"OK"+"="*10)
-        tree.draw()
+        # tree.draw()
 infile.close()
 

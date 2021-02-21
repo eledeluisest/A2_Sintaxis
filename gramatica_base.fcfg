@@ -4,8 +4,8 @@
 # ###################
 # S expansion productions
 S[SEM=?sem] -> VP[NUM=?n, SEM=?sem]
-S[SEM=?sem] -> NP[NUM=?n, SEM=?sem]
 S[SEM=[ACCION=?ac, PROPIEDAD1=?valp1, NUMERO1=?num1, PROPIEDAD2=?valp2, NUMERO2=?num2, PROPIEDAD3=?valp3, NUMERO3=?num3]] -> NP[NUM=?n, SEM=[PROPIEDAD=?valp1, ACCION=?ac, NUMERO=?num1]] PP[NUM2=?n, SEM=[PROPIEDAD=?valp2, ACCION=?ac, NUMERO=?num2]] Conj NP[NUM3=?n, SEM=[PROPIEDAD=?valp3, ACCION=?ac, NUMERO=?num3]]
+
 # NP expansion productions
 NP[NUM=?n, SEM=[PROPIEDAD=?valp, ACCION=?ac, NUMERO=?num]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac, NUMERO=?num]
 NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac, NUMERO=?num] Num[NUMERO=?num, PROPIEDAD=?valp]
@@ -25,55 +25,76 @@ VP[NUM=?n, NUM2=?n2, NUM3=?n3, SEM=[ACCION=?ac, PROPIEDAD1=?valp1, NUMERO1=?num1
 VP[NUM=?n, NUM2=?n2, SEM=[ACCION=?ac, PROPIEDAD1=?valp1, NUMERO1=?num1, PROPIEDAD2=?valp2, NUMERO2=?num2]] -> TV[ACCION=?ac] NP[NUM=?n, SEM=[PROPIEDAD=?valp1, ACCION=?ac, NUMERO=?num1]] PP[NUM2=?n2, SEM=[PROPIEDAD=?valp2, ACCION=?ac, NUMERO=?num2]]
 VP[NUM=?n, NUM2=?n2, SEM=[ACCION=?ac, PROPIEDAD1=?valp1, NUMERO1=?num1, PROPIEDAD2=?valp2, NUMERO2=?num2]] -> TV[ACCION=?ac] PP[NUM=?n, SEM=[PROPIEDAD=?valp1, ACCION=?ac, NUMERO=?num1]] NP[NUM2=?n2, SEM=[PROPIEDAD=?valp2, ACCION=?ac, NUMERO=?num2]]
 VP[NUM=?n, SEM=[ACCION=?ac]] -> TV[NUM=?n, ACCION=?ac]
+
 # PP expansion productions
 PP[NUM=?n, SEM=?sem] -> Prep NP[NUM=?n, SEM=?sem]
 
 # ###################
 # Lexical Productions
 # ###################
-TV[ACCION=anular, PROPIEDAD=?prop] -> "para" |"detente" | "anular" | "cancelar"
-TV[ACCION=encender, PROPIEDAD=?prop] -> "activa" | "inicia"
+# Verbos. acciones
+TV[ACCION=detener, PROPIEDAD=?prop] -> "para" |"detente" | "stop"
+TV[ACCION=anular, PROPIEDAD=?prop] ->  "anular" | "cancelar"
+TV[ACCION=encender, PROPIEDAD=?prop] -> "activa" | "inicia" | "comienza"
 TV[ACCION=retomar, PROPIEDAD=?prop] -> "reanuda" | "continúa" | "continuar"
-TV[ACCION=calentar, PROPIEDAD=?prop] -> "calienta" |  "calentar"
-TV[ACCION=batir, PROPIEDAD=?prop] ->  "bate" | "batir" | "revolver" | "girar"
 
-# Velocidades cualitativas
+TV[ACCION=configura, PROPIEDAD=?prop] -> "calienta" |  "configura" | "bate" | "revolver" | "girar" | "mezclar" | "batir" | "calentar"
+
+# Adjetivos. Velocidades cualitativas
 Adj[NUM=sg, NUMERO=1, PROPIEDAD=velocidad, ACCION=?ac] -> "mínima"
 Adj[NUM=sg, NUMERO=10, PROPIEDAD=velocidad, ACCION=?ac] -> "máxima"
 Adj[NUM=sg, NUMERO=5, PROPIEDAD=velocidad, ACCION=?ac] -> "media"
 
-# Temperaturas cualatitatvias
+# Adjetivos. Temperaturas cualatitatvias
 Adj[NUM=sg, NUMERO=1, PROPIEDAD=temperatura, ACCION=?ac] -> "mínima"
 Adj[NUM=sg, NUMERO=100, PROPIEDAD=temperatura, ACCION=?ac] -> "máxima"
 Adj[NUM=sg, NUMERO=50, PROPIEDAD=temperatura, ACCION=?ac] -> "media"
 
+# Conjunciones
 Conj -> "y"
-Det[NUM=sg] -> "el"
 
-N[NUM=sg, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=?ac] ->  "grado" | "temperatura"
-N[NUM=sg, NUMERO=?numero, PROPIEDAD=minutos, ACCION=?ac] ->  "minuto" | "medio"
-N[NUM=sg, NUMERO=?numero, PROPIEDAD=segundo, ACCION=?ac] -> "segundo"
-N[NUM=sg, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=batir] -> "velocidad" | "rpm"
+# Determinantes
+Det[NUM=sg] -> "el"
+Det[NUM=pl] -> "los"
+
+# Preposiciones
+Prep -> "a" | "durante" | "de" | "por"
+
+# Sustantivos
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=configura] ->  "grado" | "temperatura"
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=configura] ->  "grado" | "temperatura"
+
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=minutos, ACCION=configura] ->  "minuto" | "medio" | "segundo"
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=minutos, ACCION=configura] ->  "minuto" | "medio" | "segundo"
+
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=configura] -> "velocidad" | "rpm"
+N[NUM=sg, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=configura] -> "velocidad" | "rpm"
 N[NUM=sg, NUMERO=?numero, PROPIEDAD=programa, ACCION=?ac] -> "programa"
 
-N[NUM=pl, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=?ac] ->  "grados" | "temperaturas"
-N[NUM=pl, NUMERO=?numero, PROPIEDAD=minutos, ACCION=?ac] ->  "minutos" | "segundos"
-N[NUM=pl, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=batir] -> "velocidades"
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=configura] ->  "grados" | "temperaturas"
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=temperatura, ACCION=configura] ->  "grados" | "temperaturas"
+
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=minutos, ACCION=configura] ->  "minutos" | "segundos"
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=minutos, ACCION=configura] ->  "minutos" | "segundos"
+
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=configura] -> "velocidades"
+N[NUM=pl, NUMERO=?numero, PROPIEDAD=velocidad, ACCION=configura] -> "velocidades"
+
 N[NUM=pl, NUMERO=?numero, PROPIEDAD=programa, ACCION=?ac] -> "programas"
 
-# Velocidad
-Num[NUM=sg, NUMERO=1, PROPIEDAD=velocidad, ACCION=batir] ->  "un" | "uno"
-Num[NUM=pl, NUMERO=2, PROPIEDAD=velocidad, ACCION=batir] ->  "dos"
-Num[NUM=pl, NUMERO=3, PROPIEDAD=velocidad, ACCION=batir] ->  "tres"
-Num[NUM=pl, NUMERO=4, PROPIEDAD=velocidad, ACCION=batir] ->  "cuatro"
-Num[NUM=pl, NUMERO=5, PROPIEDAD=velocidad, ACCION=batir] ->  "cinco"
-Num[NUM=pl, NUMERO=6, PROPIEDAD=velocidad, ACCION=batir] ->  "seis"
-Num[NUM=pl, NUMERO=7, PROPIEDAD=velocidad, ACCION=batir] ->  "siete"
-Num[NUM=pl, NUMERO=8, PROPIEDAD=velocidad, ACCION=batir] ->  "oche"
-Num[NUM=pl, NUMERO=9, PROPIEDAD=velocidad, ACCION=batir] ->  "nueve"
-Num[NUM=pl, NUMERO=10, PROPIEDAD=velocidad, ACCION=batir] ->  "diez"
+# Numeros. Velocidad
+Num[NUM=sg, NUMERO=1, PROPIEDAD=velocidad, ACCION=configura] ->  "un" | "uno"
+Num[NUM=pl, NUMERO=2, PROPIEDAD=velocidad, ACCION=configura] ->  "dos"
+Num[NUM=pl, NUMERO=3, PROPIEDAD=velocidad, ACCION=configura] ->  "tres"
+Num[NUM=pl, NUMERO=4, PROPIEDAD=velocidad, ACCION=configura] ->  "cuatro"
+Num[NUM=pl, NUMERO=5, PROPIEDAD=velocidad, ACCION=configura] ->  "cinco"
+Num[NUM=pl, NUMERO=6, PROPIEDAD=velocidad, ACCION=configura] ->  "seis"
+Num[NUM=pl, NUMERO=7, PROPIEDAD=velocidad, ACCION=configura] ->  "siete"
+Num[NUM=pl, NUMERO=8, PROPIEDAD=velocidad, ACCION=configura] ->  "oche"
+Num[NUM=pl, NUMERO=9, PROPIEDAD=velocidad, ACCION=configura] ->  "nueve"
+Num[NUM=pl, NUMERO=10, PROPIEDAD=velocidad, ACCION=configura] ->  "diez"
 
-# Programa
+# Numeros. Programa
 Num[NUM=sg, NUMERO=1, PROPIEDAD=programa, ACCION=?ac] ->  "un" | "uno"
 Num[NUM=pl, NUMERO=2, PROPIEDAD=programa, ACCION=?ac] ->  "dos"
 Num[NUM=pl, NUMERO=3, PROPIEDAD=programa, ACCION=?ac] ->  "tres"
@@ -85,7 +106,7 @@ Num[NUM=pl, NUMERO=8, PROPIEDAD=programa, ACCION=?ac] ->  "oche"
 Num[NUM=pl, NUMERO=9, PROPIEDAD=programa, ACCION=?ac] ->  "nueve"
 Num[NUM=pl, NUMERO=10, PROPIEDAD=programa, ACCION=?ac] ->  "diez"
 
-# Temperatura
+# Numeros. Temperatura
 Num[NUM=pl, NUMERO=10, PROPIEDAD=temperatura, ACCION=?ac] ->  "diez"
 Num[NUM=pl, NUMERO=20, PROPIEDAD=temperatura, ACCION=?ac] ->  "veinte"
 Num[NUM=pl, NUMERO=30, PROPIEDAD=temperatura, ACCION=?ac] ->  "treinta"
@@ -97,7 +118,7 @@ Num[NUM=pl, NUMERO=80, PROPIEDAD=temperatura, ACCION=?ac] ->  "ochenta"
 Num[NUM=pl, NUMERO=90, PROPIEDAD=temperatura, ACCION=?ac] ->  "noventa"
 Num[NUM=pl, NUMERO=100, PROPIEDAD=temperatura, ACCION=?ac] ->  "cien"
 
-# minutos
+# Numeros. Minutos
 Num[NUM=sg, NUMERO=1, PROPIEDAD=minutos, ACCION=?ac] ->  "un" | "uno"
 Num[NUM=pl, NUMERO=2, PROPIEDAD=minutos, ACCION=?ac] ->  "dos"
 Num[NUM=pl, NUMERO=3, PROPIEDAD=minutos, ACCION=?ac] ->  "tres"
@@ -118,6 +139,6 @@ Num[NUM=pl, NUMERO=80, PROPIEDAD=minutos, ACCION=?ac] ->  "ochenta"
 Num[NUM=pl, NUMERO=90, PROPIEDAD=minutos, ACCION=?ac] ->  "noventa"
 Num[NUM=pl, NUMERO=100, PROPIEDAD=minutos, ACCION=?ac] ->  "cien"
 
-Prep -> "a" | "durante" | "de" | "por"
+
 
 
