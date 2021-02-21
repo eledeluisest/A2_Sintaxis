@@ -1,4 +1,3 @@
-bate a velocidad cinco noventa grados durante tres minutos y veinte segundos
 girar a velocidad cien
 batir a velocidad diez grados
 activa el programa cien
