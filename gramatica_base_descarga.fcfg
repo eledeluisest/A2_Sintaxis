@@ -1,0 +1,14 @@
+% start S
+# ###################
+# Grammar Productions
+# ###################
+# S expansion productions
+S[SEM=?sem] -> VP[SEM=?sem] 
+VP[SEM=[ACCION=?val]] -> V[ACCION=?val]
+
+
+# ###################
+# Lexical Productions
+# ###################
+V[ACCION=anular] -> 'anular' | 'cancelar'
+

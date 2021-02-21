@@ -1,0 +1,43 @@
+% start S
+# ###################
+# Grammar Productions
+# ###################
+# S expansion productions
+S -> VP[TENSE=?t, NUM=?n]
+S -> NP[NUM=?n]
+S -> NP[NUM=?n] PP[NUM2=?n] Conj NP[NUM3=?n]
+# NP expansion productions
+NP[NUM=?n] -> N[NUM=?n]
+NP[NUM=?n] -> N[NUM=?n] Num
+NP[NUM=?n, NUM2=?n2] -> N[NUM=?n] Num N[NUM2=?n2]
+NP[NUM=?n] -> N[NUM=?n] Adj[NUM=?n]
+NP[NUM=?n] -> Num N[NUM=?n]
+NP[NUM=?n, NUM2=?n2] -> NP[NUM=?n] Conj NP[NUM2=?n2]
+NP[NUM=?n] -> Det[NUM=?n] N[NUM=?n]
+NP[NUM=?n] -> Det[NUM=?n] N[NUM=?n]  Num
+NP[NUM=?n] -> Num PP[NUM=?n]
+
+# VP expansion productions
+VP[TENSE=?t] -> IV[TENSE=?t]
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t] NP[NUM=?n]
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t] PP[NUM=?n]
+VP[TENSE=?t, NUM=?n, NUM2=?n2] -> TV[TENSE=?t] PP[NUM=?n] PP[NUM2=?n2]
+VP[TENSE=?t, NUM=?n, NUM2=?n2, NUM3=?n3] -> TV[TENSE=?t] PP[NUM=?n] NP[NUM2=?n2] PP[NUM3=?n3]
+VP[TENSE=?t, NUM=?n, NUM2=?n2] -> TV[TENSE=?t] NPC[NUM=?n] PP[NUM2=?n2]
+VP[TENSE=?t, NUM=?n, NUM2=?n2] -> TV[TENSE=?t] PP[NUM=?n] NP[NUM2=?n2]
+VP[TENSE=?t, NUM=?n] -> TV[TENSE=?t, NUM=?n]
+# PP expansion productions
+PP[NUM=?n] -> Prep NP[NUM=?n]
+# ###################
+# Lexical Productions
+# ###################
+TV[TENSE=pres] -> "calienta" | "bate" | "batir" | "revolver" | "girar" | "calentar" | "para" |"detente" | "anular" | "cancelar" | "reanuda" | "continúa" | "continuar" | "activa" | "inicia"
+Adj[NUM=sg] -> "máxima" | "mínima" | "media"
+Conj -> "y"
+Det[NUM=sg] -> "el"
+N[NUM=sg] -> "grado" | "minuto" | "velocidad" | "segundo" | "temperatura" | "medio" | "programa" | "rpm"
+N[NUM=pl] -> "grados" | "minutos" | "velocidades" | "segundos" | "temperaturas" | "medios" | "programas"
+Num -> "un" | "uno" | "dos" | "tres" | "cuatro" | "cinco" | "seis" | "siete" | "ocho" | "nueve" | "diez" | "veinte" | "treinta" | "cuarenta" | "cincuenta" | "sesenta" | "setenta" | "ochenta" | "noventa" | "cien"
+Prep -> "a" | "durante" | "de" | "por"
+
+

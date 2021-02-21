@@ -1,0 +1,22 @@
+calienta a cincuenta grados dos minutos
+bate a velocidad cinco noventa grados durante tres minutos y veinte segundos
+bate a temperatura noventa diez minutos y medio
+calienta a noventa grados durante dos minutos
+batir dos minutos a temperatura veinte
+revolver a temperatura máxima
+girar a velocidad mínima
+tres minutos a cien de temperatura y tres de velocidad
+calentar a cincuenta grados a velocidad tres
+para
+detente
+anular
+cancelar
+reanuda
+continúa
+continuar
+activa el programa tres
+inicia el programa cuatro
+batir a velocidad diez grados
+girar a velocidad cien
+activa el programa cien
+detente a velocidad diez

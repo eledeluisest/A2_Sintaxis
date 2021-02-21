@@ -1,0 +1,122 @@
+% start S
+# ###################
+# Grammar Productions
+# ###################
+# S expansion productions
+S[SEM=?sem] -> VP[NUM=?n, SEM=?sem]
+S[SEM=?sem] -> NP[NUM=?n, SEM=?sem]
+S[SEM1=?sem1, SEM2=?sem2, SEM3=?sem3] -> NP[NUM=?n, SEM=?sem1] PP[NUM2=?n, SEM=?sem2] Conj NP[NUM3=?n, SEM=?sem3]
+# NP expansion productions
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, ACCION=?ac]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac]
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac] Num[NUMERO=?num, PROPIEDAD=?valp]
+NP[NUM=?n, NUM2=?n2, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac] Num[NUM2=?n2, NUMERO=?num, PROPIEDAD=?valp] N[NUM2=?n2, PROPIEDAD=?valp, ACCION=?ac]
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac] Adj[NUM=?n, NUMERO=?num, PROPIEDAD=?valp]
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> Num[NUMERO=?num, PROPIEDAD=?valp] N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac]
+NP[NUM=?n, NUM2=?n2, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] Conj NP[NUM2=?n2, SEM=[PROPIEDAD=?valp, ACCION=?ac]]
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, ACCION=?ac]] -> Det[NUM=?n] N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac]
+NP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> Det[NUM=?n] N[NUM=?n, PROPIEDAD=?valp, ACCION=?ac]  Num[NUMERO=?num, PROPIEDAD=?valp]
+NP[NUM=?n, SEM=[SEM=?sem, NUMERO=?num, PROPIEDAD=?valp, ACCION=?ac]] -> Num[NUMERO=?num, PROPIEDAD=?valp] PP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]]
+
+# VP expansion productions
+VP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> TV[ ACCION=?ac] NP[SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]]
+VP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]] -> TV[ACCION=?ac] PP[NUM=?n, SEM=[PROPIEDAD=?valp, NUMERO=?num, ACCION=?ac]]
+VP[NUM=?n, NUM2=?n2, SEM=[ACCION=?val, SEM1=?sem1, SEM2=?sem2]] -> TV[ACCION=?val] PP[NUM=?n, SEM=?sem1] PP[NUM2=?n2, SEM=?sem2]
+VP[NUM=?n, NUM2=?n2, NUM3=?n3, SEM=[ACCION=?val, SEM1=?sem1, SEM2=?sem2, SEM3=?sem3]] -> TV[ACCION=?val] PP[NUM=?n, SEM=?sem1] NP[NUM2=?n2,  SEM=?sem2] PP[NUM3=?n3,  SEM=?sem3]
+VP[NUM=?n, NUM2=?n2, SEM=[ACCION=?val, SEM1=?sem1, SEM2=?sem2]] -> TV[ACCION=?val] NP[NUM=?n,  SEM=?sem1] PP[NUM2=?n2, SEM=?sem2]
+VP[NUM=?n, NUM2=?n2, SEM=[ACCION=?val, SEM1=?sem1, SEM2=?sem2]] -> TV[ACCION=?val] PP[NUM=?n, SEM=?sem1] NP[NUM2=?n2, SEM=?sem2]
+VP[NUM=?n, SEM=[ACCION=?val]] -> TV[NUM=?n, ACCION=?val]
+# PP expansion productions
+PP[NUM=?n, SEM=?sem] -> Prep NP[NUM=?n, SEM=?sem]
+
+# ###################
+# Lexical Productions
+# ###################
+TV[ACCION=anular, PROPIEDAD=?prop] -> "para" |"detente" | "anular" | "cancelar"
+TV[ACCION=encender, PROPIEDAD=?prop] -> "activa" | "inicia"
+TV[ACCION=retomar, PROPIEDAD=?prop] -> "reanuda" | "continúa" | "continuar"
+TV[ACCION=calentar, PROPIEDAD=?prop] -> "calienta" |  "calentar"
+TV[ACCION=batir, PROPIEDAD=?prop] ->  "bate" | "batir" | "revolver" | "girar"
+
+# Velocidades cualitativas
+Adj[NUM=sg, NUMERO=1, PROPIEDAD=velocidad, ACCION=?ac] -> "mínima"
+Adj[NUM=sg, NUMERO=10, PROPIEDAD=velocidad, ACCION=?ac] -> "máxima"
+Adj[NUM=sg, NUMERO=5, PROPIEDAD=velocidad, ACCION=?ac] -> "media"
+
+# Temperaturas cualatitatvias
+Adj[NUM=sg, NUMERO=1, PROPIEDAD=temperatura, ACCION=?ac] -> "mínima"
+Adj[NUM=sg, NUMERO=100, PROPIEDAD=temperatura, ACCION=?ac] -> "máxima"
+Adj[NUM=sg, NUMERO=50, PROPIEDAD=temperatura, ACCION=?ac] -> "media"
+
+Conj -> "y"
+Det[NUM=sg] -> "el"
+
+N[NUM=sg, PROPIEDAD=temperatura, ACCION=?ac] ->  "grado" | "temperatura"
+N[NUM=sg, PROPIEDAD=minutos, ACCION=?ac] ->  "minuto" | "medio"
+N[NUM=sg, PROPIEDAD=segundo, ACCION=?ac] -> "segundo"
+N[NUM=sg, PROPIEDAD=velocidad, ACCION=batir] -> "velocidad" | "rpm"
+N[NUM=sg, PROPIEDAD=programa, ACCION=?ac] -> "programa"
+
+N[NUM=pl, PROPIEDAD=temperatura, ACCION=?ac] ->  "grados" | "temperaturas"
+N[NUM=pl, PROPIEDAD=minutos, ACCION=?ac] ->  "minutos" | "segundos"
+N[NUM=pl, PROPIEDAD=velocidad, ACCION=batir] -> "velocidades"
+N[NUM=pl, PROPIEDAD=programa, ACCION=?ac] -> "programas"
+
+# Velocidad
+Num[NUM=?n, NUMERO=1, PROPIEDAD=velocidad, ACCION=?ac] ->  "un" | "uno"
+Num[NUM=?n, NUMERO=2, PROPIEDAD=velocidad, ACCION=?ac] ->  "dos"
+Num[NUM=?n, NUMERO=3, PROPIEDAD=velocidad, ACCION=?ac] ->  "tres"
+Num[NUM=?n, NUMERO=4, PROPIEDAD=velocidad, ACCION=?ac] ->  "cuatro"
+Num[NUM=?n, NUMERO=5, PROPIEDAD=velocidad, ACCION=?ac] ->  "cinco"
+Num[NUM=?n, NUMERO=6, PROPIEDAD=velocidad, ACCION=?ac] ->  "seis"
+Num[NUM=?n, NUMERO=7, PROPIEDAD=velocidad, ACCION=?ac] ->  "siete"
+Num[NUM=?n, NUMERO=8, PROPIEDAD=velocidad, ACCION=?ac] ->  "oche"
+Num[NUM=?n, NUMERO=9, PROPIEDAD=velocidad, ACCION=?ac] ->  "nueve"
+Num[NUM=?n, NUMERO=10, PROPIEDAD=velocidad, ACCION=?ac] ->  "diez"
+
+# Programa
+Num[NUM=?n, NUMERO=1, PROPIEDAD=programa, ACCION=?ac] ->  "un" | "uno"
+Num[NUM=?n, NUMERO=2, PROPIEDAD=programa, ACCION=?ac] ->  "dos"
+Num[NUM=?n, NUMERO=3, PROPIEDAD=programa, ACCION=?ac] ->  "tres"
+Num[NUM=?n, NUMERO=4, PROPIEDAD=programa, ACCION=?ac] ->  "cuatro"
+Num[NUM=?n, NUMERO=5, PROPIEDAD=programa, ACCION=?ac] ->  "cinco"
+Num[NUM=?n, NUMERO=6, PROPIEDAD=programa, ACCION=?ac] ->  "seis"
+Num[NUM=?n, NUMERO=7, PROPIEDAD=programa, ACCION=?ac] ->  "siete"
+Num[NUM=?n, NUMERO=8, PROPIEDAD=programa, ACCION=?ac] ->  "oche"
+Num[NUM=?n, NUMERO=9, PROPIEDAD=programa, ACCION=?ac] ->  "nueve"
+Num[NUM=?n, NUMERO=10, PROPIEDAD=programa, ACCION=?ac] ->  "diez"
+
+# Temperatura
+Num[NUM=?n, NUMERO=20, PROPIEDAD=temperatura, ACCION=?ac] ->  "veinte"
+Num[NUM=?n, NUMERO=30, PROPIEDAD=temperatura, ACCION=?ac] ->  "treinta"
+Num[NUM=?n, NUMERO=40, PROPIEDAD=temperatura, ACCION=?ac] ->  "cuarenta"
+Num[NUM=?n, NUMERO=50, PROPIEDAD=temperatura, ACCION=?ac] ->  "cincuenta"
+Num[NUM=?n, NUMERO=60, PROPIEDAD=temperatura, ACCION=?ac] ->  "sesenta"
+Num[NUM=?n, NUMERO=70, PROPIEDAD=temperatura, ACCION=?ac] ->  "setenta"
+Num[NUM=?n, NUMERO=80, PROPIEDAD=temperatura, ACCION=?ac] ->  "ochenta"
+Num[NUM=?n, NUMERO=90, PROPIEDAD=temperatura, ACCION=?ac] ->  "noventa"
+Num[NUM=?n, NUMERO=100, PROPIEDAD=temperatura, ACCION=?ac] ->  "cien"
+
+# minutos
+Num[NUM=?n, NUMERO=1, PROPIEDAD=minutos, ACCION=?ac] ->  "un" | "uno"
+Num[NUM=?n, NUMERO=2, PROPIEDAD=minutos, ACCION=?ac] ->  "dos"
+Num[NUM=?n, NUMERO=3, PROPIEDAD=minutos, ACCION=?ac] ->  "tres"
+Num[NUM=?n, NUMERO=4, PROPIEDAD=minutos, ACCION=?ac] ->  "cuatro"
+Num[NUM=?n, NUMERO=5, PROPIEDAD=minutos, ACCION=?ac] ->  "cinco"
+Num[NUM=?n, NUMERO=6, PROPIEDAD=minutos, ACCION=?ac] ->  "seis"
+Num[NUM=?n, NUMERO=7, PROPIEDAD=minutos, ACCION=?ac] ->  "siete"
+Num[NUM=?n, NUMERO=8, PROPIEDAD=minutos, ACCION=?ac] ->  "oche"
+Num[NUM=?n, NUMERO=9, PROPIEDAD=minutos, ACCION=?ac] ->  "nueve"
+Num[NUM=?n, NUMERO=10, PROPIEDAD=minutos, ACCION=?ac] ->  "diez"
+Num[NUM=?n, NUMERO=20, PROPIEDAD=minutos, ACCION=?ac] ->  "veinte"
+Num[NUM=?n, NUMERO=30, PROPIEDAD=minutos, ACCION=?ac] ->  "treinta"
+Num[NUM=?n, NUMERO=40, PROPIEDAD=minutos, ACCION=?ac] ->  "cuarenta"
+Num[NUM=?n, NUMERO=50, PROPIEDAD=minutos, ACCION=?ac] ->  "cincuenta"
+Num[NUM=?n, NUMERO=60, PROPIEDAD=minutos, ACCION=?ac] ->  "sesenta"
+Num[NUM=?n, NUMERO=70, PROPIEDAD=minutos, ACCION=?ac] ->  "setenta"
+Num[NUM=?n, NUMERO=80, PROPIEDAD=minutos, ACCION=?ac] ->  "ochenta"
+Num[NUM=?n, NUMERO=90, PROPIEDAD=minutos, ACCION=?ac] ->  "noventa"
+Num[NUM=?n, NUMERO=100, PROPIEDAD=minutos, ACCION=?ac] ->  "cien"
+
+Prep -> "a" | "durante" | "de" | "por"
+
+
